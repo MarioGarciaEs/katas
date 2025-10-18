@@ -15,7 +15,8 @@ public class SnakesLadders {
     private int currentPlayer = 0;
     private boolean gameOver = false;
 
-    private final Map<Integer, Integer> snakes = Map.ofEntries(
+    private final Map<Integer, Integer> snakesAndLadders = Map.ofEntries(
+        // Snakes
         entry(16, 6),
         entry(49, 11),
         entry(46, 25),
@@ -25,10 +26,9 @@ public class SnakesLadders {
         entry(89, 68),
         entry(92, 88),
         entry(95, 75),
-        entry(99, 80)
-    );
+        entry(99, 80),
 
-    private final Map<Integer, Integer> ladders = Map.ofEntries(
+        // Ladders
         entry(2, 38),
         entry(7, 14),
         entry(8, 31),
@@ -53,14 +53,14 @@ public class SnakesLadders {
         if (this.playersPosition[currentPlayer] == 100) {
             this.gameOver = true;
             return "Player " + (currentPlayer + 1) + " Wins!";
-        } else if(this.playersPosition[currentPlayer] > 100) {
+        }
+
+        if(this.playersPosition[currentPlayer] > 100) {
             this.playersPosition[currentPlayer] = 100 - this.playersPosition[currentPlayer] % 100;
         }
 
-        if(this.snakes.containsKey(this.playersPosition[currentPlayer])) {
-            this.playersPosition[currentPlayer] = this.snakes.get(this.playersPosition[currentPlayer]);
-        } else if(this.ladders.containsKey(this.playersPosition[currentPlayer])) {
-            this.playersPosition[currentPlayer] = this.ladders.get(this.playersPosition[currentPlayer]);
+        if(this.snakesAndLadders.containsKey(this.playersPosition[currentPlayer])) {
+            this.playersPosition[currentPlayer] = this.snakesAndLadders.get(this.playersPosition[currentPlayer]);
         }
 
         String label =  "Player " + (currentPlayer + 1) + " is on square " + this.playersPosition[currentPlayer];
